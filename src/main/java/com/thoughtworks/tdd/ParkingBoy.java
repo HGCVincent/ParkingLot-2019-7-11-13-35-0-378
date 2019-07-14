@@ -18,6 +18,10 @@ public class ParkingBoy {
         this.parkingLots.add(parkingLots);
     }
 
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
     public ParkingTicket parkCar(Car car, Customer customer) {
         ParkingTicket ticket = null;
         if (car == null) {

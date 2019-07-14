@@ -198,4 +198,23 @@ public class ParkingLotTest {
         Assertions.assertNotNull(parkingTicket);
 
     }
+
+    @Test
+    public void should_return_second_parking_lot_when_smart_parking_boy_choose_the_more_empty_parking_lot_given_first_parking_lot_capacity_is_1_and__second_parking_lot_capacity_is_2() {
+
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(2);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+
+        //When
+        ParkingLot result = smartParkingBoy.chooseTheMoreEmptyParkingLot();
+
+        // Then
+        Assertions.assertSame(parkingLot2,result);
+
+    }
 }
