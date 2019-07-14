@@ -7,13 +7,19 @@ public class ParkingLot {
     private List<Car> cars = new ArrayList<>();
     private List<ParkingTicket> tickets = new ArrayList<>();
     private int capacity;
+    private int totalCapacity;
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
+        this.totalCapacity = capacity;
     }
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public int getTotalCapacity() {
+        return totalCapacity;
     }
 
     public List<ParkingTicket> getTickets() {

@@ -239,5 +239,28 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void should_return_second_parking_lot_when_super_smart_parking_boy_choose_the_lager_avaliable_position_rate_given_first_parking_lot_positon_rate_smaller_then_second_parking_lot_position_rate() {
+
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot1 = new ParkingLot(2);
+        ParkingLot parkingLot2 = new ParkingLot(3);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        parkingLot1.parkCar(car1);
+        parkingLot2.parkCar(car2);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+
+        //When
+        ParkingLot result = smartParkingBoy.chooseTheMoreEmptyParkingLot();
+
+        // Then
+        Assertions.assertSame(parkingLot2,result);
+
+    }
+
 
 }
