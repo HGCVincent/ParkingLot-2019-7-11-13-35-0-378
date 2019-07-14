@@ -134,4 +134,22 @@ public class ParkingLotTest {
         Assertions.assertEquals("Unrecognized parking ticket",Mes);
     }
 
+    @Test
+    public void should_return_message_about_please_provide_your_parking_ticket_when_query_error_massage_given_no_ticket () {
+
+        //Given
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        Customer customer = new Customer();
+        Car car = new Car();
+
+
+        //When
+        parkingBoy.fetchCar(null,customer);
+        String Mes = customer.queryErrorMessage();
+
+        // Then
+        Assertions.assertEquals("Please provide your parking ticket.",Mes);
+    }
+
 }

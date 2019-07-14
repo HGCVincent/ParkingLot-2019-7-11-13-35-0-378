@@ -19,13 +19,15 @@ public class ParkingBoy {
 
     public Car fetchCar(ParkingTicket ticket,Customer customer) {
         if (ticket == null){
+            customer.setErrorMessage("Please provide your parking ticket.");
             return null;
         }
         else {
-            if (parkingLot.fetchCar(ticket) == null){
+            Car car = parkingLot.fetchCar(ticket);
+            if (car == null){
                 customer.setErrorMessage("Unrecognized parking ticket");
             }
-            return parkingLot.fetchCar(ticket);
+            return car;
         }
     }
 }
