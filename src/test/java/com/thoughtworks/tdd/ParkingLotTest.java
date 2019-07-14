@@ -217,4 +217,27 @@ public class ParkingLotTest {
         Assertions.assertSame(parkingLot2,result);
 
     }
+
+    @Test
+    public void should_park_the_car_to_second_lot_when_smart_parking_boy_park_car_given_first_parking_lot_capacity_is_1_and__second_parking_lot_capacity_is_2() {
+
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(2);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        Car car = new Car();
+        Customer customer = new Customer();
+
+        //When
+        ParkingTicket ticket = smartParkingBoy.parkCar(car,customer);
+
+        // Then
+        Assertions.assertEquals(true,parkingLot2.getTickets().contains(ticket));
+
+    }
+
+
 }

@@ -16,6 +16,10 @@ public class ParkingLot {
         return capacity;
     }
 
+    public List<ParkingTicket> getTickets() {
+        return tickets;
+    }
+
     public ParkingTicket parkCar(Car car){
         if (isFull()){
             return null;

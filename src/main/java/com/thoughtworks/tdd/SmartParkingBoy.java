@@ -19,4 +19,18 @@ public class SmartParkingBoy extends ParkingBoy {
         int index = capacityList.indexOf(Collections.max(capacityList));
         return getParkingLots().get(index);
     }
+
+    @Override
+    public ParkingTicket parkCar(Car car, Customer customer) {
+        ParkingTicket ticket = null;
+        ParkingLot selectedParkingLot = chooseTheMoreEmptyParkingLot();
+        if (car == null) {
+            return ticket;
+        }else if (selectedParkingLot.getCapacity() == 0){
+            customer.setErrorMessage("Not enough position.");
+        }else{
+            ticket = selectedParkingLot.parkCar(car);
+        }
+        return ticket;
+    }
 }
