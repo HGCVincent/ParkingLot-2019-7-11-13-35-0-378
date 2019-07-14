@@ -19,4 +19,20 @@ public class SuperSmartParkingBoy extends ParkingBoy {
         return getParkingLots().get(index);
     }
 
+    @Override
+    public ParkingTicket parkCar(Car car, Customer customer) {
+        ParkingTicket ticket = null;
+        ParkingLot selectedParkingLot = chooseLargerAvailablePositionRateParkingLot();
+        if (car == null) {
+            return ticket;
+        }else if (selectedParkingLot.getCapacity() == 0){
+            customer.setErrorMessage("Not enough position.");
+        }else{
+            ticket = selectedParkingLot.parkCar(car);
+        }
+        return ticket;
+    }
+
+
+
 }
