@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingBoy {
     private ParkingLot parkingLot;
 
@@ -14,11 +17,14 @@ public class ParkingBoy {
         return parkingLot.parkCar(car);
     }
 
-    public Car fetchCar(ParkingTicket ticket) {
+    public Car fetchCar(ParkingTicket ticket,Customer customer) {
         if (ticket == null){
             return null;
         }
         else {
+            if (parkingLot.fetchCar(ticket) == null){
+                customer.setErrorMessage("Unrecognized parking ticket");
+            }
             return parkingLot.fetchCar(ticket);
         }
     }
