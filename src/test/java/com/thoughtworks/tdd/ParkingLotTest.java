@@ -40,4 +40,21 @@ public class ParkingLotTest {
         Assertions.assertSame(fetchCar, null);
 
     }
+
+    @Test
+    public void should_return_null_when_fetch_car_no_given_ticket_to_fetch_the_car () {
+
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingTicket corretTicket = parkingBoy.parkCar(car);
+
+        //When
+        Car fetchCar = parkingBoy.fetchCar(null);
+
+        // Then
+        Assertions.assertSame(fetchCar, null);
+
+    }
 }
