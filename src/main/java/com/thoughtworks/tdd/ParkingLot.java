@@ -1,14 +1,25 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingLot {
-    private Car car;
+    private List<Car> cars = new ArrayList<>();
 
     public ParkingTicket parkCar(Car car){
-        this.car = car;
-        return new ParkingTicket();
+        cars.add(car);
+        return new ParkingTicket(car);
     }
 
     public Car fetchCar(ParkingTicket ticket){
-        return car;
+        if (cars.contains(ticket.getCar())) {
+            return ticket.getCar();
+        }
+        else{
+            return null;
+        }
     }
+
+
+
 }
