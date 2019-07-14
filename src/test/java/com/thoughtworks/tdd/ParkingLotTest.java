@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ParkingLotTest {
@@ -284,6 +285,32 @@ public class ParkingLotTest {
 
         // Then
         Assertions.assertEquals(true,parkingLot2.getTickets().contains(ticket));
+
+    }
+
+    @Test
+    public void should_return_ticket_when_manage1_add_parking_boy_to_park_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+
+        // given
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        List<ParkingLot> parkingLots1 = new ArrayList<>();
+        List<ParkingLot> parkingLots2 = new ArrayList<>();
+        parkingLots1.add(parkingLot1);
+
+        Car car = new Car();
+        Customer customer = new Customer();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots1);
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1, parkingBoys);
+
+        // when
+        ParkingTicket ticket = parkingLotManager.chooseParkingBoyToPark(parkingBoy, car, customer);
+
+        //then
+        Assertions.assertTrue(parkingLot1.getTickets().contains(ticket));
 
     }
 
