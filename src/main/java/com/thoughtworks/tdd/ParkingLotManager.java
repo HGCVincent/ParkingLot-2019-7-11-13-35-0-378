@@ -4,12 +4,11 @@ import sun.security.krb5.internal.Ticket;
 
 import java.util.List;
 
-public class ParkingLotManager {
-    private ParkingLot parkingLot;
+public class ParkingLotManager extends ParkingBoy{
     private List<ParkingBoy> parkingBoys;
 
-    public ParkingLotManager(ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
-        this.parkingLot = parkingLot;
+    public ParkingLotManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
+        super(parkingLots);
         this.parkingBoys = parkingBoys;
     }
 

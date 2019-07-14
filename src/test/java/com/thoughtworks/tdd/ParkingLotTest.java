@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sun.security.krb5.internal.Ticket;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -304,7 +305,7 @@ public class ParkingLotTest {
 
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1, parkingBoys);
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLots1, parkingBoys);
 
         // when
         ParkingTicket ticket = parkingLotManager.chooseParkingBoyToPark(parkingBoy, car, customer);
@@ -314,5 +315,52 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void should_return_message_to_manager_about_unrecognized_ticket_when_manager_fetch_car_given_wrong_ticket() {
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLots.add(parkingLot);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+
+        Customer customer =new Customer();
+        Car car = new Car();
+
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLots, parkingBoys);
+        ParkingTicket parkingTicket = parkingLotManager.chooseParkingBoyToPark(parkingBoy,car,customer);
+        parkingLotManager.chooseParkingBoyToFetch(parkingBoy,parkingTicket,customer);
+
+        //When
+        Car fetchCar = parkingLotManager.chooseParkingBoyToFetch(parkingBoy,parkingTicket,customer);
+        String result = customer.queryErrorMessage();
+
+        // Then
+        Assertions.assertSame("Unrecognized parking ticket", result);
+    }
+
+    @Test
+    public void should_return_message_to_manager_about_provide_ticket_when_manager_choose_parking_boy_fetch_car_given_have_no_ticket() {
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLots.add(parkingLot);
+        Car car = new Car();
+        Customer customer = new Customer();
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoys.add(parkingBoy);
+
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLots, parkingBoys);
+        ParkingTicket ticket = parkingLotManager.chooseParkingBoyToPark(parkingBoy,car,customer);
+
+        //When
+        parkingLotManager.chooseParkingBoyToFetch(parkingBoy,null,customer);
+
+        // Then
+        Assertions.assertSame("Please provide your parking ticket.", customer.queryErrorMessage());
+    }
 
 }
