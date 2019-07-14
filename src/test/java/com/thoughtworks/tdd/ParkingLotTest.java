@@ -27,7 +27,7 @@ public class ParkingLotTest {
     public void  should_return_null_when_fetch_car_given_have_wrong_ticket_to_fetch_the_car () {
 
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
         ParkingTicket corretTicket = parkingBoy.parkCar(car);
@@ -45,7 +45,7 @@ public class ParkingLotTest {
     public void should_return_null_when_fetch_car_no_given_ticket_to_fetch_the_car () {
 
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
         ParkingTicket corretTicket = parkingBoy.parkCar(car);
@@ -62,7 +62,7 @@ public class ParkingLotTest {
     public void  should_return_no_car_when_fetch_car_given_used_ticket () {
 
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
         ParkingTicket ticket = parkingBoy.parkCar(car);
@@ -77,7 +77,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void  should_return_no_ticket_when_fetch_car_given_more_then_limit_cars () {
+    public void  should_return_no_ticket_when_park_car_given_more_then_limit_cars () {
 
         //Given
         ParkingLot parkingLot = new ParkingLot(2);
@@ -94,4 +94,19 @@ public class ParkingLotTest {
         // Then
         Assertions.assertSame(null, ticket);
     }
+
+    @Test
+    public void should_return_null_when_park_car_given_null_car () {
+
+        //Given
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+
+        //When
+        ParkingTicket ticket = parkingBoy.parkCar(null);
+
+        // Then
+        Assertions.assertSame(null, ticket);
+    }
+
 }
